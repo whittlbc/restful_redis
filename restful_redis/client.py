@@ -13,7 +13,9 @@ class RestfulRedisClient(object):
     self.redis = StrictRedis.from_url(url=url)
     self.channel = channel
 
-  def request(self, data={}, timeout=60):
+  def request(self, data=None, timeout=60):
+    data = data or {}
+
     # Create a uid for this specific request
     request_uid = fresh_request_uid()
 
@@ -37,7 +39,7 @@ class RestfulRedisClient(object):
       # Attempt to parse JSON response
       parsed_resp = json.loads(resp[1])
     except:
-      raise JsonParseException()
+      raise JSONParseException()
 
     succeeded = parsed_resp.get('ok')
     resp_data = parsed_resp.get('data')

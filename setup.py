@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='restful_redis',
-      version='0.0.1',
+      version='0.0.2',
       description='Redis queues for synchronous server2server ops',
       url='https://github.com/whittlbc/restful_redis',
       author='Ben Whittle',
