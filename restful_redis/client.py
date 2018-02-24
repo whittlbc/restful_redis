@@ -39,7 +39,14 @@ class RestfulRedisClient(object):
     except:
       raise JsonParseException()
 
+    succeeded = parsed_resp.get('ok')
+    resp_data = parsed_resp.get('data')
+
+    # Ensure request succeeded
+    if not succeeded:
+      raise ResponseError(resp_data)
+
     # Delete request key
     self.redis.delete(request_uid)
 
-    return parsed_resp
+    return resp_data

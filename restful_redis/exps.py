@@ -11,3 +11,8 @@ class InvalidRequestException(BaseException):
 class RequestTimeout(BaseException):
   def __init__(self):
     self.message = 'Request timed out.'
+
+
+class ResponseError(BaseException):
+  def __init__(self, message):
+    self.message = message

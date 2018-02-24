@@ -30,8 +30,14 @@ class RestfulRedisServer(object):
       if not request_uid:
         raise InvalidRequestException(payload)
 
-      # Call target function to get JSON response
-      resp = self.target(payload.get('data', {}))
+      resp = {'ok': True}
+
+      try:
+        # Call target function
+        resp['data'] = self.target(payload.get('data', {}))
+      except BaseException as e:
+        resp['ok'] = False
+        resp['data'] = e.message
 
       # Push the JSON response to channel=request_uid
       self.redis.rpush(request_uid, json.dumps(resp))
