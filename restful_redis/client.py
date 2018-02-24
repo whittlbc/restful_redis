@@ -13,7 +13,7 @@ class RestfulRedisClient(object):
     self.redis = StrictRedis.from_url(url=url)
     self.channel = channel
 
-  def request(self, data=None, timeout=60):
+  def request(self, target, data=None, timeout=60):
     data = data or {}
 
     # Create a uid for this specific request
@@ -21,6 +21,7 @@ class RestfulRedisClient(object):
 
     # Wrap custom data into payload, along with request uid
     payload = {
+      'target': target,
       'data': data,
       'request_uid': request_uid
     }
