@@ -9,6 +9,6 @@ setup(name='restful_redis',
       license='MIT.',
       packages=find_packages(),
       install_requires=[
-        'redis==2.10.6'
+        'redis==4.4.4'
       ],
       zip_safe=False)
